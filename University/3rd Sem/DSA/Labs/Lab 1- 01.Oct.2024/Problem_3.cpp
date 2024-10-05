@@ -41,9 +41,10 @@ string lowerCase(string name)
 string titleCase(string name)
 {
 	int length =  name.length();
+	bool isNew = false;
 	for(int i=0;i<length;i++)
 	{
-		int index = 0;
+		//int index = 0;
 		char c = name[i];
 		if(i==0 && c!=' ')
 		{
@@ -52,12 +53,14 @@ string titleCase(string name)
 				name[i] = toupper(c);
 			}
 		}
-		else if(i=index)
+		else if(isNew)
 		{
 			if(name[i]!=' '&& (c>='a' && c<='z'))
 			{
 				name[i] = toupper(c);
+				
 			}
+			isNew=false;
 		}
 		else
 		{
@@ -67,7 +70,7 @@ string titleCase(string name)
 			}
 			else if(c==' ')
 			{
-				index = i+1;
+				isNew = true;
 			}
 		}
 	}
