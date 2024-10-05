@@ -28,5 +28,6 @@ public class Calclulator {
 			System.out.println("Invalid Operator");
 		}
 		System.out.println(x+""+op+y+" = "+result);	
+		inp.close();
 	}
 }

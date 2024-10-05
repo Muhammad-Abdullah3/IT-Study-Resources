@@ -9,6 +9,7 @@ public class Name {
         {
             System.out.println(name);
         }
+        inp.close();
     }
 
 }

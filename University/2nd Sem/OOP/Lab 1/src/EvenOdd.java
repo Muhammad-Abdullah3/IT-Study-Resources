@@ -14,6 +14,7 @@ public class EvenOdd {
             System.out.println("Number is odd.");
             System.out.println("Number after squaring is: "+num);
         }
+        inp.close();
     }
 
 }
