@@ -10,12 +10,12 @@
 using namespace std;
 int main()
 {
-	int row, col;
+	int row;
 	cout<<"Enter the number of rows and cols: ";
-	cin>>row>>col;
+	cin>>row;
 	for(int i=0;i<=row;i++)
 	{
-		for(int j=col-i;j>0;j--)
+		for(int j=row-i;j>row;j--)
 		{
 			cout<<"*";
 		}
