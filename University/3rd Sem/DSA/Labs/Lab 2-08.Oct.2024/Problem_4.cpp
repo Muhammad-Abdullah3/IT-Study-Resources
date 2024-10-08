@@ -2,7 +2,7 @@
 using namespace std;
 void prob4(int arr[],int size)
 {
-    bool isdup = false;
+    //bool isdup = false;
     int indArr[size];
     for(int i=0;i<size;i++)
     {
