@@ -2,7 +2,7 @@
 using namespace std;
 int prob8(int arr[],int size)
 {
-    int sum = arr[0];
+    int sum = 0;
     for(int i=0;i<size;i+=2)
     {
         sum = sum+arr[i];
@@ -11,6 +11,13 @@ int prob8(int arr[],int size)
 }
 int main()
 {
-
+    int size = 6;
+    int arr[size];
+    cout<<"Enter elements of Array: ";
+    for(int i=0;i<size;i++)
+    {
+        cin>>arr[i];
+    }
+    cout<<"Sum of elements at even indicies = "<<prob8(arr,size);
     return 0;
 }

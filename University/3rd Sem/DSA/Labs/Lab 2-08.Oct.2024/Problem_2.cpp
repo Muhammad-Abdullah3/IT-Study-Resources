@@ -12,8 +12,7 @@ class Lab2 {
                 count++;
             }
         }
-        return count;
-        
+        return count;  
     }
 };
 int main() {

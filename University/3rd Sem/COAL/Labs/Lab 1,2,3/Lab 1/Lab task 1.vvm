@@ -1,0 +1,6 @@
+IN
+ADD 99
+OUT
+HLT
+*99
+DAT -010

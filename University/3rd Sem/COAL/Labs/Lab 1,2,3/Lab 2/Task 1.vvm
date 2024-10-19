@@ -1,0 +1,13 @@
+IN
+// Only input 5
+STO 95
+IN
+STO 98
+LDA 98
+BRZ 99
+LDA 98
+SUB 95
+BRP 10
+BR 99
+LDA 98
+OUT

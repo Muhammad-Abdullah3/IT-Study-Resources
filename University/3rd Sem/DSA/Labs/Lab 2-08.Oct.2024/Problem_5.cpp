@@ -2,18 +2,17 @@
 using namespace std;
 bool isSorted(int arr[],int size)
 {
-    bool isSort = true;
     for(int i=0;i<size-1;i++)
     {
         for(int j=i+1;j<size;j++)
         {   
             if(arr[i]>arr[j])
             {
-                isSort = false;
+                return false;
             }
         }
     }
-    return isSort;
+    return true;
 }
 int main()
 {
