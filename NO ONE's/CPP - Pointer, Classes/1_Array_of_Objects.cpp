@@ -80,3 +80,4 @@ int main() {
     }
     return 0;
 }
+// Is program ki output ki formatting behter ki ja sakti hai
