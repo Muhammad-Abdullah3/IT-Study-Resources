@@ -1,0 +1,5 @@
+IN
+STO 30
+ADD 30
+OUT
+HLT

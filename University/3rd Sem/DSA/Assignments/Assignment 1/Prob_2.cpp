@@ -44,9 +44,9 @@ class Rectangle: public Shape {
 };
 
 int main() {
-    //vector<Shape> shapes;
-    vector<Circle> circles;
-    vector<Rectangle> rectangles;
+    vector<Shape*> shapes;
+    //vector<Circle> circles;
+    //vector<Rectangle> rectangles;
     int n;
     cout<<"Enter number of shapes to find area of: ";
     cin>>n;
@@ -54,16 +54,16 @@ int main() {
         int choice;
         cout<<"Enter even for Circle, odd for Rectangle: ";
         cin>>choice;
-        //shapes.push_back(choice%2==0 ? Circle():Rectangle());
+        //shapes.push_back(choice%2==0 ?  new Circle(): new Rectangle());
         if(choice%2==0) {
-            circles.push_back(Circle());
-            circles[i].setPerimeter();
-            cout<<"Area of Circle "<<i+1<<": "<<circles[i].getArea()<<endl;
+            shapes.push_back(new Circle());
+            ((Circle*)shapes[i])->setPerimeter();
+            cout<<"Area of Circle "<<i+1<<": "<<((Circle*)shapes[i])->getArea()<<endl;
         }
         else {
-            rectangles.push_back(Rectangle());
-            rectangles[i].setPerimeter();
-            cout<<"Area of Rectangle "<<i+1<<": "<<rectangles[i].getArea()<<endl;
+            shapes.push_back(new Rectangle());
+            ((Rectangle*)shapes[i])->setPerimeter();
+            cout<<"Area of Rectangle "<<i+1<<": "<<((Rectangle*)shapes[i])->getArea()<<endl;
         }
     }
     /*cout<<"\n\t\t\t\tArea of Circles: \t\t\t\t\n";
