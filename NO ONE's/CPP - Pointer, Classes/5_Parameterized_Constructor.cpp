@@ -33,8 +33,8 @@ class Calculator2 {
     // values ko intialize karwayenge
     Calculator2(float a,float b): num1 (a) , num2 (b) {}
     // ye basically jo kam kar raha hai wo is tarah ka hai
-    // num1 = 19
-    // num2 = 10
+    // num1 = a
+    // num2 = b
     // so agar colon laga ke uske bad variables ko is tarah initialize karte hain and 
     //(,) comma hamen show karta hai ke ye aik line khatam ho chuki hai
     // is tarah ham ek constructor ko 2 mukhtalif tareeke se likh sakte hain
