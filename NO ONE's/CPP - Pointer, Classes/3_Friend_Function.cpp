@@ -38,5 +38,4 @@ int main() {
     display(s2);
     s3.display();
     return 0;
-
 }
