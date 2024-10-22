@@ -39,7 +39,7 @@ int main() {
     cout<<"\n\n";
     cout<<"\t------------------------------------------------------------------"<<endl;
     // Creating an object of Student class with Copy Constructor
-    Student* s3;
+    Student s3;
     s3 = new Student(*s2);
     cout<<"\t\t\tDetails of Student 3"<<endl;
     s3->displayDetails();
