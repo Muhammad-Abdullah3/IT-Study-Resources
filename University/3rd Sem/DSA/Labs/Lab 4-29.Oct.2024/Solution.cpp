@@ -41,6 +41,7 @@ class Searching {
 };
 int main()
 {
+    //First Problem
     int size = 6;
     int Arr[6] = {13,12,22,2,12,54};
     Searching search;
