@@ -27,4 +27,31 @@ class User {
         }
         return false;
     }
+    // checking if the account with this email is present or not
+    bool isEmailpresent(string email) {
+        int size = User::email.size();
+        for(int i=0;i<size;i++) {
+            if(email==User::email[i]) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // Checking if the email and password are matched i.e successful login
+    bool isLoginSuccessful(string email,string pass) {
+        int size = User::email.size();
+        int index = -1;
+        for(int i=0;i<size;i++) {
+            if(email==User::email[i]) {
+                index = i;
+                break;
+            }
+        }
+        if(pass==User::password[index]) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 };
