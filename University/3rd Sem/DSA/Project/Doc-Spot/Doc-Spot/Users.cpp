@@ -37,4 +37,27 @@ class User {
             return false;
         }
     }
+    void displayUsers() {
+        for(int i=0;i<User::firstName.size();i++) {
+            cout<<"User "<<i+1<<endl;
+            cout<<"First Name"<<User::firstName[i]<<endl;
+            cout<<"Last Name"<<User::lastName[i]<<endl;
+            cout<<"University"<<User::university[i]<<endl;
+
+        }
+    }
 };
+vector<string> User::firstName;
+vector<string> User::lastName;
+vector<string> User::university;
+vector<string> User::email;
+vector<string> User::password;
+
+
+int main() {
+    User user;
+    user.adduserCredentials("John","Doe","ABC University","john.doe@abcuni.com","asd5Av1$a#");
+    user.adduserCredentials("Jane","Doe","ABC University","jane.doe@abcuni.com","sdQ4!ljiH31*&end");
+    user.displayUsers();
+    return 0;
+}

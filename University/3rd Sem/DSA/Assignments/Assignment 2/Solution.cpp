@@ -1,43 +1,52 @@
 #include <iostream>
+#include<vector>
 using namespace std;
 
-double findMedianSortedArrays(int class1[], int size1, int class2[], int size2) {
-    int totalSize = size1 + size2;
-    int medianIndex1 = (totalSize - 1) / 2;
-    int medianIndex2 = totalSize / 2;
+float findMedian(vector<int> vect1,vector<int> vect2) {
+    int size1 = vect1.size();
+    int size2 = vect2.size();
+    int newSize = size1 + size2;
     
-    int i = 0, j = 0, count = 0;
-    int current = 0, previous = 0;
+    int vect1Count = 0; 
+    int vect2Count = 0; 
+    int loopCount = 0;
+    int currentMedian = 0;
+    int previousMedian = 0;
 
-    while (count <= medianIndex2) {
-        previous = current;
+    while (loopCount <= newSize/2) {
+        previousMedian = currentMedian;
         
-        if (i < size1 && (j >= size2 || class1[i] <= class2[j])) {
-            current = class1[i];
-            i++;
+        if (vect1Count < size1 && (vect2Count >= size2 || vect1[vect1Count] <= vect2[vect2Count])) {
+            currentMedian = vect1[vect1Count];
+            vect1Count++;
         } else {
-            current = class2[j];
-            j++;
+            currentMedian = vect2[vect2Count];
+            vect2Count++;
         }
         
-        count++;
+        loopCount++;
     }
 
     
-    if (totalSize % 2 == 1) {
-        return current;
+    if (newSize % 2 == 0) {
+        return (previousMedian + currentMedian) / 2.0;
     }
-    return (previous + current) / 2.0;
+    else {
+        return currentMedian;
+    }
 }
 
 int main() {
-    int class1[] = {55, 70, 85};
-    int class2[] = {60, 75, 90, 100};
-    int size1 = sizeof(class1) / sizeof(class1[0]);
-    int size2 = sizeof(class2) / sizeof(class2[0]);
-    
-    double median = findMedianSortedArrays(class1, size1, class2, size2);
+    vector<int> vect1 = {55, 70, 85,95};
+    vector<int> vect2 = {60, 75, 90, 100};
+    vector<int> vect3 = {55, 70, 85};
+    cout<<"Test Case 1"<<endl;
+    float median = findMedian(vect3, vect2);// {55,60,70,75,85,90,95,100}
     cout << "Median = " << median << endl;
+
+    cout<<"Test Case 2"<<endl;
+    float median2 = findMedian(vect1, vect2);// {55,60,70,75,85,90,95,100}
+    cout << "Median = " << median2 << endl;
 
     return 0;
 }
