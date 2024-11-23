@@ -1,4 +1,4 @@
-#include<iostream>
+/*#include<iostream>
 #include<string>
 #include<conio.h>
 using namespace std;
@@ -47,4 +47,126 @@ int main() {
     cout<<"\t------------------------------------------------------------------"<<endl;
     getch();
     return 0;
+}*/
+
+/*#include<iostream>
+using namespace std;
+void bubblesort(int arr[]){
+	for(int i=0;i<5-1;i++){
+		for(int j=0;j<5-i-1;j++){
+		if(arr[j]>arr[j+1]){
+		int temp;
+		temp=arr[j];
+		arr[j]=arr[j+1];
+		arr[j+1]=temp;
+		}
+	}
 }
+}
+int main(){
+	int arr[5]={2,5,7,1,3};
+     bubblesort( arr);
+	cout<<"Sorting Array is : { ";
+	for(int i=0;i<5;i++){
+		cout<<arr[i]<<"  ";
+	}
+	cout<<" }";
+	
+	return 0;
+}*/
+
+/*#include<iostream>
+using namespace std;
+void insertionSort(int arr[], int size) {
+    for (int i = 1; i < size; i++) {
+        int key = arr[i];
+        for (int j = i - 1; j >= 0; j--) {
+            if (arr[j] > key) {
+                arr[j + 1] = arr[j];
+                arr[j] = key;
+            } else {
+                break; // Exit loop once the correct position is found
+            }
+        }
+    }
+}
+
+}
+int main(){
+	int arr[5]={9,5,-1,4,3};
+     insertionsort( arr);
+	cout<<"Sorting Array is : { ";
+	for(int i=0;i<5;i++){
+		cout<<arr[i]<<"  ";
+	}
+	cout<<" }";
+	
+	return 0;
+}*/
+/*#include <iostream>
+using namespace std;
+
+void selectionSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        int minIndex = size - 1; // Set minimum to the last index initially
+        for (int j = size - 1; j > i; j--) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j; // Update the index of the minimum element
+            }
+        }
+        // Swap the found minimum with the element at index `i`
+        if (arr[minIndex] < arr[i]) {
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+    }
+}
+
+int main() {
+    int arr[] = {20, 12, 10, 15, 2};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Original Array: ";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    selectionSort(arr, size);
+
+    cout << "Sorted Array: ";
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}*/
+#include<iostream>
+using namespace std;
+void selectionsort(int arr[5]){
+	for(int i=0;i<5;i++){
+		int min=i;
+		for(int j=i+1;j<5;j++){
+			  if (arr[j] < arr[min]){
+			min=j;
+			  }
+		}
+		if(min!=i){
+			swap(arr[i],arr[min]);
+		}
+	}	
+}
+int main(){
+	int arr[5]={2,9,5,3,1};
+	selectionsort(arr);
+	cout<<"Sorted array is : { ";
+	for (int i=0;i<5;i++){
+		cout<<arr[i]<<" ";
+	}
+	cout<<" }";
+	
+	return 0;
+}
+

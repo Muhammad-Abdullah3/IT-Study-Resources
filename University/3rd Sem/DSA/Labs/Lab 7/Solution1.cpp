@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 class SinglyLinkedList {
 private:
     struct Node {
@@ -45,15 +44,11 @@ public:
             current = current->next;
         }
         return false;
-    }
-
-   
+    } 
     void add(int x) {
             Node* newNode = new Node(x, header->next);
             header->next = newNode;
     }
-
-    
     void remove(int x) {
         Node* current = header;
         while (current->next != nullptr) {
@@ -67,7 +62,6 @@ public:
         }
     }
 };
-
 // Main function for testing
 int main() {
     SinglyLinkedList list;
