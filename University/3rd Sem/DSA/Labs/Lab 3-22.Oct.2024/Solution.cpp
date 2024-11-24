@@ -143,7 +143,7 @@ int main() {
 
     return 0;
 }*/
-#include<iostream>
+/*#include<iostream>
 using namespace std;
 void selectionsort(int arr[5]){
 	for(int i=0;i<5;i++){
@@ -168,5 +168,56 @@ int main(){
 	cout<<" }";
 	
 	return 0;
+}*/
+
+#include <iostream>
+using namespace std;
+class node {
+public:
+    int data;
+    node* next;
+
+    // Constructor to initialize the node
+    node(int value) {
+        data = value;
+        next = nullptr;
+    }
+};
+
+// Function to insert a node at the end of the linked list
+void insert(node*& head, int value) {
+    node* n = new node(value);
+    if (head == nullptr) {
+        head = n;
+        return;
+    }
+    node* temp = head;
+    while (temp->next != nullptr) {
+        temp = temp->next;
+    }
+    temp->next = n;
+}
+
+// Function to display the linked list
+void display(node* head) {
+    node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+}
+
+int main() {
+    node* head = nullptr;
+
+    // Insert elements into the linked list
+    insert(head, 1);
+    insert(head, 2);
+    insert(head, 3);
+
+    // Display the linked list
+    display(head);
+
+    return 0;
 }
 
