@@ -1,54 +1,64 @@
 #include <iostream>
-#include <stack>
+#include <string>
 using namespace std;
 
-// Function to check if the parentheses are balanced
-bool isBalanced(const string& str) {
-    stack<char> s;
+class Stack {
+private:
+    struct Node {
+        char data;
+        Node* next;
+        Node(char value) : data(value), next(nullptr) {}
+    };
+    Node* top;
 
+public:
+    Stack() : top(nullptr) {}
+
+    void push(char value) {
+        Node* newNode = new Node(value);
+        newNode->next = top;
+        top = newNode;
+    }
+
+    void pop() {
+        if (isEmpty()) return;
+        Node* temp = top;
+        top = top->next;
+        delete temp;
+    }
+
+    char peek() {
+        return isEmpty() ? '\0' : top->data;
+    }
+
+    bool isEmpty() {
+        return top == nullptr;
+    }
+};
+
+bool isBalanced(const string& str) {
+    Stack s;
     for (char ch : str) {
-        // Push opening brackets onto the stack
         if (ch == '(' || ch == '{' || ch == '[') {
             s.push(ch);
-        } 
-        // Check for closing brackets
-        else if (ch == ')' || ch == '}' || ch == ']') {
-            // If stack is empty or the top of the stack does not match the current closing bracket
-            if (s.empty()) return false;
-
-            char top = s.top();
-            s.pop();
-
-            if ((ch == ')' && top != '(') || 
-                (ch == '}' && top != '{') || 
-                (ch == ']' && top != '[')) {
+        } else if (ch == ')' || ch == '}' || ch == ']') {
+            if (s.isEmpty()) return false;
+            char top = s.peek();
+            if ((ch == ')' && top == '(') || (ch == '}' && top == '{') || (ch == ']' && top == '[')) {
+                s.pop();
+            } else {
                 return false;
             }
         }
     }
-
-    // If stack is empty, it means all brackets were balanced
-    return s.empty();
+    return s.isEmpty();
 }
 
 int main() {
-    string input;
+    string input1 = "({[()]})";
+    string input2 = "({[([)])})";
 
-    // Test case 1
-    input = "({[()]})";
-    cout << input << endl;
-    if (isBalanced(input)) {
-        cout << "Balanced" << endl;
-    } else {
-        cout << "Not Balanced" << endl;
-    }
-
-    // Test case 2
-    input = "({[([)])}";
-    if (isBalanced(input)) {
-        cout << "Balanced" << endl;
-    } else {
-        cout << "Not Balanced" << endl;
-    }
+    cout << input1 << " => " << (isBalanced(input1) ? "Balanced" : "Not Balanced") << endl;
+    cout << input2 << " => " << (isBalanced(input2) ? "Balanced" : "Not Balanced") << endl;
     return 0;
 }

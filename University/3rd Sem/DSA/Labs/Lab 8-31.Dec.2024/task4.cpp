@@ -20,21 +20,14 @@ public:
     }
 
     void pop() {
-        if (isEmpty()) {
-            cout << "Stack is empty. Cannot pop.\n";
-            return;
-        }
+        if (isEmpty()) return;
         Node* temp = top;
         top = top->next;
         delete temp;
     }
 
     int peek() {
-        if (isEmpty()) {
-            cout << "Stack is empty.\n";
-            return -1;
-        }
-        return top->data;
+        return isEmpty() ? -1 : top->data;
     }
 
     bool isEmpty() {
@@ -51,16 +44,40 @@ public:
     }
 };
 
+void sortedInsert(Stack& s, int value) {
+    if (s.isEmpty() || value > s.peek()) {
+        s.push(value);
+        return;
+    }
+    int temp = s.peek();
+    s.pop();
+    sortedInsert(s, value);
+    s.push(temp);
+}
+
+void sortStack(Stack& s) {
+    if (!s.isEmpty()) {
+        int temp = s.peek();
+        s.pop();
+        sortStack(s);
+        sortedInsert(s, temp);
+    }
+}
+
 int main() {
     Stack s;
-    s.push(10);
-    s.push(20);
-    s.push(30);
-    cout << "Stack elements: ";
+    s.push(3);
+    s.push(1);
+    s.push(4);
+    s.push(2);
+
+    cout << "Original stack: ";
     s.display();
-    cout << "Top element: " << s.peek() << endl;
-    s.pop();
-    cout << "Stack after pop: ";
+
+    sortStack(s);
+
+    cout << "Sorted stack in Descending Order: ";
     s.display();
+
     return 0;
 }

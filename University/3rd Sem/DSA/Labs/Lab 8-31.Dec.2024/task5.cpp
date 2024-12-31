@@ -1,76 +1,68 @@
 #include <iostream>
-#include <string>
+#include <cctype>
 using namespace std;
-
-
-struct Node {
-    int data;
-    Node* next;
-};
 
 class Stack {
 private:
+    struct Node {
+        int data;
+        Node* next;
+        Node(int value) : data(value), next(nullptr) {}
+    };
     Node* top;
+
 public:
     Stack() : top(nullptr) {}
 
     void push(int value) {
-        Node* newNode = new Node;
-        if (!newNode) {
-            cout << "Stack overflow: Unable to push " << value << endl;
-            return;
-        }
-        newNode->data = value;
+        Node* newNode = new Node(value);
         newNode->next = top;
         top = newNode;
     }
 
-    int pop() {
-        if (!top) {
-            cout << "Stack underflow: No elements to pop" << endl;
-            return -1;
-        }
-        int value = top->data;
+    void pop() {
+        if (isEmpty()) return;
         Node* temp = top;
         top = top->next;
         delete temp;
-        return value;
     }
 
-    
+    int peek() {
+        return isEmpty() ? -1 : top->data;
+    }
+
+    bool isEmpty() {
+        return top == nullptr;
+    }
 };
 
-int evaluatePostfix(string expression) {
-    Stack stack;
-    int length = expression.length();
-    int result = 0;
+int evaluatePostfix(const string& expression) {
+    Stack s;
 
-    for (int i = 0; i < length; ++i) {
-        char ch = expression[i];
-        if (ch >= '0' && ch <= '9') {
-            stack.push(ch - '0');
+    for (char ch : expression) {
+        if (isdigit(ch)) {
+            s.push(ch - '0');
         } else {
-            int val2 = stack.pop();
-            int val1 = stack.pop();
-            if (val1 == -1 || val2 == -1) {
-                cout << "Error: Not enough operands in the stack" << endl;
-                return -1;
-            }
+            int val2 = s.peek(); s.pop();
+            int val1 = s.peek(); s.pop();
+
             switch (ch) {
-                case '+': result = val1 + val2; break;
-                case '-': result = val1 - val2; break;
-                case '*': result = val1 * val2; break;
-                case '/': result = val1 / val2; break;
+                case '+': s.push(val1 + val2); break;
+                case '-': s.push(val1 - val2); break;
+                case '*': s.push(val1 * val2); break;
+                case '/': s.push(val1 / val2); break;
             }
-            stack.push(result);
         }
     }
-    return stack.pop();
+    return s.peek();
 }
 
 int main() {
     string postfix = "231*+9-";
-    int result = evaluatePostfix(postfix);
-        cout << "Final Result: " << result << endl;
+    cout << "Postfix Expression: " << postfix << endl;
+    cout << "Evaluation Result: " << evaluatePostfix(postfix) << endl;
+    string postfix2 = "431*+9+2/";
+    cout << "Postfix Expression 2: " << postfix2 << endl;
+    cout << "Evaluation Result 2: " << evaluatePostfix(postfix2) << endl;
     return 0;
 }
