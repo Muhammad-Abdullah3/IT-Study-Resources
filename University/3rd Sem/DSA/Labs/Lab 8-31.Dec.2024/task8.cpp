@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
 class Stack {
 private:
     struct Node {
@@ -62,7 +61,6 @@ vector<int> findNextGreaterElements(vector<int>& arr) {
         }
         stack.push(i);
     }
-
     return result;
 }
 
