@@ -1,54 +1,39 @@
 #include <iostream>
-#include <stdexcept>
-#include <algorithm>
 using namespace std;
 
-class MinStack {
+class Stack {
 private:
-    struct MinNode {
+    struct Node {
         int data;
-        int minSoFar;
-        MinNode* next;
+        int minData;
+        Node* next;
+        Node(int value, int minVal) : data(value), minData(minVal), next(nullptr) {}
     };
-    MinNode* top;
+    Node* top;
 
 public:
-    MinStack() : top(nullptr) {}
+    Stack() : top(nullptr) {}
 
     void push(int value) {
-    int currentMin;
-    if (top == nullptr) {
-        currentMin = value;
-    } else {
-        currentMin = min(value, top->minSoFar);
+        int minVal = isEmpty() ? value : min(value, top->minData);
+        Node* newNode = new Node(value, minVal);
+        newNode->next = top;
+        top = newNode;
     }
 
-    MinNode* newNode = new MinNode;
-    newNode->data = value;
-    newNode->minSoFar = currentMin;
-    newNode->next = top;
-
-    top = newNode;
-}
-
-    int pop() {
-        if (!top) {
-            cout << "Stack underflow: No elements to pop" << endl;
-            return -1;
-        }
-        int value = top->data;
-        MinNode* temp = top;
+    void pop() {
+        if (isEmpty()) return;
+        Node* temp = top;
         top = top->next;
         delete temp;
-        return value;
+    }
+
+    int peek() {
+        return isEmpty() ? -1 : top->data;
     }
 
     int getMin() {
-        if (!top) {
-            cout << "Stack is empty: No minimum available" << endl;
-            return -1;
-        }
-        return top->minSoFar;
+        return isEmpty() ? -1 : top->minData;
     }
 
     bool isEmpty() {
@@ -57,13 +42,15 @@ public:
 };
 
 int main() {
-    MinStack stack;
-    stack.push(3);
-    stack.push(5);
-    stack.push(2);
-    stack.push(1);
-    stack.push(9);
+    Stack s;
+    s.push(3);
+    s.push(5);
+    s.push(2);
+    s.push(1);
+    cout << "Minimum: " << s.getMin() << endl;
+    s.pop();
+    s.pop();
+    cout << "Top Element: " << s.peek() << endl;
 
-    cout << "Minimum: " << stack.getMin() << endl; // Should print 1
     return 0;
 }

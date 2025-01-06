@@ -1,110 +1,60 @@
 #include <iostream>
 using namespace std;
 
-struct ListNode {
-    int data;
-    ListNode* next;
-};
-
-class Stack {
+class LinkedList {
 private:
     struct Node {
         int data;
         Node* next;
+        Node(int value) : data(value), next(nullptr) {}
     };
-    Node* top;
+    Node* head;
 
 public:
-    Stack() {
-        top = nullptr;
-    }
+    LinkedList() : head(nullptr) {}
 
     void push(int value) {
-        Node* newNode = new Node;
-        newNode->data = value;
-        newNode->next = top;
-        top = newNode;
+        Node* newNode = new Node(value);
+        newNode->next = head;
+        head = newNode;
     }
 
-    int pop() {
-        if (top == nullptr) {
-            cout << "Stack underflow: No elements to pop" << endl;
-            return -1;
+    void display() {
+        Node* temp = head;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+
+    void reverse() {
+        Node* temp = head;
+        LinkedList stack;
+
+        while (temp) {
+            stack.push(temp->data);
+            temp = temp->next;
         }
 
-        int value = top->data;
-        Node* temp = top;
-        top = top->next;
-        delete temp;
-
-        return value;
-    }
-
-    bool isEmpty() {
-        return top == nullptr;
+        head = stack.head;
     }
 };
 
-ListNode* reverseList(ListNode* head) {
-    Stack stack;
-
-    // Push all elements of the list into the stack
-    ListNode* current = head;
-    while (current != nullptr) {
-        stack.push(current->data);
-        current = current->next;
-    }
-
-    // Create a new reversed list
-    ListNode* dummy = new ListNode;
-    dummy->data = 0;
-    dummy->next = nullptr;
-
-    ListNode* temp = dummy;
-
-    while (!stack.isEmpty()) {
-        ListNode* newNode = new ListNode;
-        newNode->data = stack.pop();
-        newNode->next = nullptr;
-
-        temp->next = newNode;
-        temp = temp->next;
-    }
-
-    return dummy->next;
-}
-
-void printList(ListNode* head) {
-    while (head != nullptr) {
-        cout << head->data << " ";
-        head = head->next;
-    }
-    cout << endl;
-}
-
 int main() {
-    // Create the original linked list
-    ListNode* head = new ListNode;
-    head->data = 1;
-
-    head->next = new ListNode;
-    head->next->data = 2;
-
-    head->next->next = new ListNode;
-    head->next->next->data = 3;
-
-    head->next->next->next = new ListNode;
-    head->next->next->next->data = 4;
-    head->next->next->next->next = nullptr;
+    LinkedList list;
+    list.push(32);
+    list.push(1);
+    list.push(10);
+    list.push(2);
 
     cout << "Original List: ";
-    printList(head);
+    list.display();
 
-    // Reverse the list
-    head = reverseList(head);
+    list.reverse();
 
     cout << "Reversed List: ";
-    printList(head);
+    list.display();
 
     return 0;
 }
