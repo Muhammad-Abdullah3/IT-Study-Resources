@@ -99,6 +99,14 @@ public:
 
 
     DoublyLinkedList() : head(nullptr), tail(nullptr) {}
+    ~DoublyLinkedList() {
+        Node* current = head;
+        while (current) {
+            Node* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+    }
 
     // Add user to the end of the list
     void addUser(UserProfile& user) {
@@ -113,20 +121,7 @@ public:
     }
 
     // Display Current User Profile
-    void displayProfile() {
-        Node* current = head;
-        // Search for the user with the ID matching currentuser
-        while (current) {
-            if (current->data.get_user_id() == currentUser) {
-                // Display the profile of the current user
-                cout << "Logged-in User Profile:\n";
-                current->data.displayProfile();
-                cout << "-------------------------\n";
-                return;
-            }
-            current = current->next;
-        }
-    }
+    
     void debugList() {
         Node* current = head;
         while (current != nullptr) {
@@ -146,18 +141,18 @@ void login(DoublyLinkedList& userList);
 void myDocs();
 void myWallet();
 void discussionForum();
-void displayFirstPage(DoublyLinkedList& usrList);
+void displayFirstPage(DoublyLinkedList& userList);
 void aboutUs();
 bool validateEmail(string email,int uni_index);
 bool validateEmailLogin(string email);
 void signUp(DoublyLinkedList& userList,  string& name, string& email,  string& password,string& uni_name);
-
+void currentProfile(DoublyLinkedList& userList);
 
 
 
 int main() {
-    DoublyLinkedList* userList = new DoublyLinkedList();
-    displayFirstPage(*userList);
+    DoublyLinkedList userList ;
+    displayFirstPage(userList);
     return 0;
 }
 
@@ -216,7 +211,7 @@ void signupConsole(DoublyLinkedList& userList) {
     signUp(userList, name, email, password, Universities::uni_names.at(choice - 1));
 }
 
-void displayFirstPage(DoublyLinkedList& usrList) {
+void displayFirstPage(DoublyLinkedList& userList) {
     int choice;
 
     cout << "\n=== Welcome to DOC-SPOT ===\n";
@@ -228,10 +223,10 @@ void displayFirstPage(DoublyLinkedList& usrList) {
     cin >> choice;
     switch (choice) {
     case 1:
-        login(usrList);
+        login(userList);
         break;
     case 2:
-        signupConsole(usrList);
+        signupConsole(userList);
         break;
     case 3:
         aboutUs();
@@ -241,7 +236,7 @@ void displayFirstPage(DoublyLinkedList& usrList) {
         exit(0);
     default:
         cout << "Invalid choice. Please try again.\n";
-        displayFirstPage(usrList);
+        displayFirstPage(userList);
     }
 }
 
@@ -281,7 +276,6 @@ void login(DoublyLinkedList& userList) {
 
 void displayHomePage(DoublyLinkedList& userList) {
     int choice;
-    system("cls");
     userList.debugList();
     while (true) {
         cout << "\n=== DOC-SPOT Home Page ===\n";
@@ -295,7 +289,7 @@ void displayHomePage(DoublyLinkedList& userList) {
 
         switch (choice) {
         case 1:
-            userList.displayProfile();
+            currentProfile(userList);
             break;
         case 2:
             myDocs();
@@ -400,12 +394,27 @@ bool validateEmailLogin(string email) {
     string basePattern = R"(^[\w\.-]+@students\.)";
     string suffix = R"(\.edu\.pk$)";
     
-    for (auto& domain : Universities::domains) {
+    for (auto domain : Universities::domains) {
         string fullPattern = basePattern + domain + suffix;
         regex emailRegex(fullPattern);
         if (regex_match(email, emailRegex)) {
-            return true; // Valid email found
+            return true; 
         }
     }
-    return false; // No match found
+    return false; 
 }
+
+void currentProfile(DoublyLinkedList& userList) {
+        Node* current = userList.head;
+        // Search for the user with the ID matching currentuser
+        while (current) {
+            if (current->data.get_user_id() == currentUser) {
+                // Display the profile of the current user
+                cout << "Logged-in User Profile:\n";
+                current->data.displayProfile();
+                cout << "-------------------------\n";
+                return;
+            }
+            current = current->next;
+        }
+    }
